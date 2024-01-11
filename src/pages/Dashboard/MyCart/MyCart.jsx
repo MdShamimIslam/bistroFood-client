@@ -35,7 +35,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-full px-12 pt-8">
+    <div className="w-full p-12">
       <div className="flex justify-evenly gap-8 md:gap-0">
         <h3 className="md:text-xl font-semibold uppercase">
           Total Items : {cart?.length}

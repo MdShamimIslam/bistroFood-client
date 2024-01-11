@@ -10,6 +10,10 @@ import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import Bookings from "../pages/Dashboard/Bookings/Bookings";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import PrivateRoute from "./PrivateRoute";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import AdminRoute from "./AdminRoute";
 
  export const router = createBrowserRouter([
     {
@@ -40,11 +44,13 @@ import UserHome from "../pages/Dashboard/UserHome/UserHome";
     },
     {
         path:'/dashboard',
-        element:<DashboardLayout></DashboardLayout>,
+        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
+            // user routes
+            
             {
                 path:'my-Cart',
-                element:<MyCart></MyCart>
+                element:<PrivateRoute><MyCart></MyCart></PrivateRoute>
             },
             {
                 path:'bookings',
@@ -57,6 +63,16 @@ import UserHome from "../pages/Dashboard/UserHome/UserHome";
             {
                 path:'user-home',
                 element:<UserHome></UserHome>
+            },
+
+            // admin routes
+            {
+                path:'admin-home',
+                element:<AdminHome></AdminHome>
+            },
+            {
+                path:'all-users',
+                element:<PrivateRoute><AdminRoute><AllUsers></AllUsers></AdminRoute></PrivateRoute>
             }
         ]
     }
