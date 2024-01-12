@@ -33,7 +33,7 @@ const UpdateItem = () => {
               category: data.category,
             };
   
-            axiosSecure.patch(`/menu/${_id}`, menuItem)
+            axiosSecure.put(`/menu/${_id}`, menuItem)
             .then((menuRes) => {
               if (menuRes.data.modifiedCount>0) {
                 toast.success(`${data?.name} is updated successfully!`);
@@ -86,7 +86,7 @@ const UpdateItem = () => {
               <span className="label-text">Price*</span>
             </div>
             <input
-              type="number"
+              type="text"
               required
               defaultValue={price}
               placeholder="price"

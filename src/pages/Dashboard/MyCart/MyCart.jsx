@@ -3,6 +3,7 @@ import useCart from "../../../hooks/useCart";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
@@ -43,7 +44,12 @@ const MyCart = () => {
         <h3 className="md:text-xl font-semibold uppercase">
           Total Price : ${totalPrice}
         </h3>
-        <button className="btn btn-warning btn-sm">Pay Now</button>
+        {
+          cart?.length ? <Link to={'/dashboard/payment'}><button className="btn btn-warning btn-sm">Pay Now</button></Link>
+          :
+          <button disabled className="btn btn-warning btn-sm">Pay Now</button>
+        }
+       
       </div>
       <div className="overflow-x-auto mt-12 ">
         <table className="table">
