@@ -19,7 +19,7 @@ const DashboardLayout = () => {
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center ">
+        <div className="drawer-content flex flex-col items-center mt-12">
           <Outlet></Outlet>
           <label
             htmlFor="my-drawer-2"
@@ -43,8 +43,8 @@ const DashboardLayout = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="manage-users">
-                    <MdOutlineManageHistory /> Manage Users
+                  <NavLink to="manage-item">
+                    <MdOutlineManageHistory /> Manage Item
                   </NavLink>
                 </li>
                 <li>

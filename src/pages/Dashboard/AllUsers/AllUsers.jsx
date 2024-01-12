@@ -55,7 +55,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="w-full p-12">
+    <div className="w-full px-12">
       <h3 className="text-3xl font-semibold">Total Users : {users.length}</h3>
       <div className="overflow-x-auto mt-6">
         <table className="table">
