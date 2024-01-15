@@ -3,11 +3,15 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../../../hooks/useAuth";
 import {FaShoppingCart} from 'react-icons/fa';
 import useCart from "../../../../../hooks/useCart";
+import img from '../../../../../assets/profile.jpg'
+import useAdmin from "../../../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   
 
   const handleLogOut = () => {
@@ -26,23 +30,26 @@ const Navbar = () => {
       <li>
         <NavLink to="/order/salad">Order Food</NavLink>
       </li>
+      {
+        user && isAdmin
+       && 
+       <li>
+        <NavLink to="/dashboard/admin-home">Dashboard</NavLink>
+      </li>
+      }
+      {
+        user && !isAdmin
+       && 
+       <li>
+        <NavLink to="/dashboard/user-home">Dashboard</NavLink>
+      </li>
+      }
       <li>
-        <Link to='/dashboard'>
+        <Link to='/dashboard/my-cart'>
           <FaShoppingCart></FaShoppingCart>
           <div className="badge badge-secondary">+{user ? cart.length : 0}</div>
         </Link>
       </li>
-      {user ? (
-        <li>
-          <p onClick={handleLogOut} className="cursor-pointer">
-            Logout
-          </p>
-        </li>
-      ) : (
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-      )}
     </>
   );
 
@@ -79,11 +86,32 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 ">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <div className="avatar">
-          <div className="w-8 mr-4 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-            <img src={user?.photoURL} />
-          </div>
+      <div className="mr-4">
+      {user ? (
+       
+       <p onClick={handleLogOut} className="cursor-pointer">
+         Logout
+       </p>
+     
+   ) : (
+    
+       <Link to="/login">Login</Link>
+    
+   )}
+      </div>
+       {
+        user?.photoURL ?  <div className="avatar">
+        <div className="w-8 mr-4 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img src={user?.photoURL} />
         </div>
+      </div>
+      :
+      <div className="avatar">
+      <div className="w-8 mr-4 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+        <img src={img} />
+      </div>
+    </div>
+       }
       </div>
     </div>
   );

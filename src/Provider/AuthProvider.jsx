@@ -21,14 +21,16 @@ const AuthProvider = ({children}) => {
                     const token = res.data.token;
                     if(token){
                         localStorage.setItem('access-token',token);
+                        setLoading(false);
                     }
                 })
             }
             else{
                 localStorage.removeItem('access-token');
+                setLoading(false);
             }
 
-            setLoading(false)
+            
         })
         return ()=> unSubscribe();
     },[])
@@ -56,8 +58,6 @@ const AuthProvider = ({children}) => {
     }
 
     const userProfileUpdate = (name,photoURL)=>{
-        // TODO:
-        setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photoURL })
           

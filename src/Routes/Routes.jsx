@@ -19,82 +19,114 @@ import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import ManageItem from "../pages/Dashboard/ManageUsers/ManageItem";
 import Payment from "../pages/Dashboard/Payment/Payment";
 
- export const router = createBrowserRouter([
-    {
-        path:'/',
-        element:<Main></Main>,
-        children:[
-            {
-                path:'/',
-                element:<Home></Home>
-            },
-            {
-                path:'/menu',
-                element:<Menu></Menu>
-            },
-            {
-                path:'/order/:category',
-                element:<Order></Order>
-            }
-        ]
-    },
-    {
-        path:'/login',
-        element:<Login></Login>
-    },
-    {
-        path:'/signUp',
-        element:<SignUp></SignUp>
-    },
-    {
-        path:'/dashboard',
-        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-        children:[
-            // user routes
-            {
-                path:'my-Cart',
-                element:<PrivateRoute><MyCart></MyCart></PrivateRoute>
-            },
-            {
-                path:'payment',
-                element:<PrivateRoute><Payment></Payment></PrivateRoute>
-            },
-            {
-                path:'bookings',
-                element:<Bookings></Bookings>
-            },
-            {
-                path:'payment-history',
-                element:<PaymentHistory></PaymentHistory>
-            },
-            {
-                path:'user-home',
-                element:<UserHome></UserHome>
-            },
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/menu",
+        element: <Menu></Menu>,
+      },
+      {
+        path: "/order/:category",
+        element: <Order></Order>,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/signUp",
+    element: <SignUp></SignUp>,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      // user routes
+      {
+        path: "my-Cart",
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: <Bookings></Bookings>,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "user-home",
+        element: <UserHome></UserHome>,
+      },
 
-            // admin routes
-            {
-                path:'admin-home',
-                element:<AdminHome></AdminHome>
-            },
-            {
-                path:'all-users',
-                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
-            },
-            {
-                path:'add-item',
-                element:<AdminRoute><AddItem></AddItem></AdminRoute>
-            },
-            {
-                path:'manage-item',
-                element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
-            },
-            {
-                path:'update-item/:id',
-                element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
-            },
-
-        ]
-    }
-])
+      // admin routes
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-item",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-item",
+        element: (
+          <AdminRoute>
+            <ManageItem></ManageItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "update-item/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+      },
+    ],
+  },
+]);
